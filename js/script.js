@@ -18,19 +18,57 @@ console.log('Età del passeggero: ', age);
 let price = kilometers * 0.21;
 console.log('Prezzo di base: ', price);
 
-// 4 - 5 - Verifico se ci sono sconti da applicare e, se necessario, li applico
+// BONUS - Validazione
 
-if(age < 18)
+let isValid = true;
+let errorMessage = null;
+
+// Controllo che i chilometri siano un numero maggiore di 0
+
+if (isNaN(kilometers) || kilometers <= 0)
 {
-    price *= 0.2;  
+    isValid = false;
+    errorMessage = 'Il numero di chilometri inserito è errato \n';
 }
-if(age >= 65)
+
+// Controllo che l'età sia un numero maggiore di 0 plausibile
+
+if (isNaN(age) || age <= 0 || age > 125)
 {
-    price *= 0.4;
+    isValid = false;
+    errorMessage += "L'età inserita è errata";
 }
 
-console.log('Prezzo finale: ', price);
+if (!isValid)
+{
+    alert(errorMessage);
+}
+else
+{
+    // BONUS - Inserisco nel DOM il chilometraggio, l'età, e il prezzo prima dello sconto
 
-// 6 - Arrotondo il prezzo e lo inserisco nell'elemento del DOM
+    document.getElementById('kilometers').innerText = kilometers;
+    document.getElementById('age').innerText = age;
 
-pricePlaceholder.innerText = price.toFixed(2);
+    if (age < 18 || age >= 65)
+    {
+        document.getElementById('initial-price').innerText = 'Prezzo senza sconto: €' + price.toFixed(2);
+    }
+
+    // 4 - 5 - Verifico se ci sono sconti da applicare e, se necessario, li applico
+
+    if (age < 18)
+    {
+        price *= 0.2;  
+    }
+    if (age >= 65)
+    {
+        price *= 0.4;
+    }
+
+    console.log('Prezzo finale: ', price);
+
+    // 6 - Arrotondo il prezzo e lo inserisco nell'elemento del DOM
+
+    pricePlaceholder.innerText = price.toFixed(2);
+}
