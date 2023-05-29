@@ -59,11 +59,11 @@ else
 
     if (age < 18)
     {
-        price *= 0.2;  
+        price *= 0.8;  
     }
     if (age >= 65)
     {
-        price *= 0.4;
+        price *= 0.6;
     }
 
     console.log('Prezzo finale: ', price);
